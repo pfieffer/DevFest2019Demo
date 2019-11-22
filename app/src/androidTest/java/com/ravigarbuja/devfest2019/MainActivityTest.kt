@@ -104,5 +104,19 @@ class MainActivityTest{
             .check(matches(not(isEnabled())))
     }
 
-  
+    /**
+     * Finally
+     * Check if the login button is enabled if email and password are both validated
+     */
+    @Test
+    fun validEmail_validPassword_loginButtonEnabled(){
+        onView(withId(R.id.et_email))
+            .perform(typeText(validEmail))
+
+        onView(withId(R.id.et_password))
+            .perform(typeText(validPassword))
+
+        onView(withId(R.id.btn_login))
+            .check(matches(isEnabled()))
+    }
 }
