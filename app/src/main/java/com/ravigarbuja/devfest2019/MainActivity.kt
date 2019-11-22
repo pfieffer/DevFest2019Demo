@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     //a placeholder function to validate password field
     private fun checkPasswordField(passwordString: String) {
         if(passwordString.length <8){
-            et_password.error = "Too Short"
+            et_password.error = getString(R.string.invalid_password)
         } else{
             et_password.error = null
         }
