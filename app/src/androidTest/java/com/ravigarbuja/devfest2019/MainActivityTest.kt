@@ -48,5 +48,11 @@ class MainActivityTest{
             .check(matches(hasErrorText(activityRule.activity.getString(R.string.invalid_email))))
     }
 
+    @Test
+    fun noEmail_typeValidEmail_validateEmailField(){
+        onView(withId(R.id.et_email))
+            .perform(replaceText(validEmail))
+            .check(matches(not(hasErrorText(activityRule.activity.getString(R.string.invalid_email)))))
+    }
 
 }
