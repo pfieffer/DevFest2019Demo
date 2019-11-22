@@ -22,7 +22,10 @@ class MainActivity : AppCompatActivity() {
                 checkEmailField(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                btn_login.isEnabled =
+                    checkEmailField(s.toString()) && checkPasswordField(et_password.text.toString())
+            }
 
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
@@ -31,13 +34,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        et_password.addTextChangedListener(object : TextWatcher{
+        et_password.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkPasswordField(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                btn_login.isEnabled =
+                    checkEmailField(et_email.text.toString()) && checkPasswordField(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -47,20 +51,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     //a placeholder function to validate email field
-    private fun checkEmailField(emailString: String) {
-        return if (Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
+    private fun checkEmailField(emailString: String): Boolean {
+        if (Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
             et_email.error = null
+            return true
         } else {
             et_email.error = getString(R.string.invalid_email)
+            return false
         }
     }
 
     //a placeholder function to validate password field
-    private fun checkPasswordField(passwordString: String) {
-        if(passwordString.length <8){
+    private fun checkPasswordField(passwordString: String): Boolean {
+        if (passwordString.length < 8) {
             et_password.error = getString(R.string.invalid_password)
-        } else{
+            return false
+        } else {
             et_password.error = null
+            return true
         }
     }
 }
