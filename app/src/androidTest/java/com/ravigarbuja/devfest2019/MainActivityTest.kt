@@ -63,4 +63,11 @@ class MainActivityTest{
             .check(matches(hasErrorText("Too Short")))
     }
 
+    @Test
+    fun noInput_typeValidPassword_validatePasswordField(){
+        onView(withId(R.id.et_password))
+            .perform(typeText("not_so_short_now"))
+            .check(matches(not(hasErrorText("Too Short"))))
+    }
+
 }
