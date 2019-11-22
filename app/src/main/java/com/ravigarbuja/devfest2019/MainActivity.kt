@@ -30,6 +30,20 @@ class MainActivity : AppCompatActivity() {
             ) {
             }
         })
+
+        et_password.addTextChangedListener(object : TextWatcher{
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                checkPasswordField(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+        })
     }
 
     //a placeholder function to validate email field
@@ -38,6 +52,15 @@ class MainActivity : AppCompatActivity() {
             et_email.error = null
         } else {
             et_email.error = getString(R.string.invalid_email)
+        }
+    }
+
+    //a placeholder function to validate password field
+    private fun checkPasswordField(passwordString: String) {
+        if(passwordString.length <8){
+            et_password.error = "Too Short"
+        } else{
+            et_password.error = null
         }
     }
 }
